@@ -77,9 +77,15 @@ export default function Home() {
       style={{ "--accent": accent.value } as React.CSSProperties}
     >
       <div className="ambient-grid" aria-hidden="true" />
+      <div className="noise-field" aria-hidden="true" />
 
       <nav className="topbar" aria-label="Main navigation">
-        <a href="#home" className="brand-mark" aria-label="Go to hero">
+        <a
+          href="#home"
+          className="brand-mark glitch-mini"
+          data-text="NQN"
+          aria-label="Go to hero"
+        >
           NQN
         </a>
         <div className="nav-links">
@@ -91,11 +97,13 @@ export default function Home() {
 
       <section id="home" className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">Available for building, learning, and shipping</p>
-          <h1>Nguyen Quoc Nam</h1>
+          <p className="eyebrow">signal unstable / builder online</p>
+          <h1 className="glitch-title" data-text="Nguyen Quoc Nam">
+            Nguyen Quoc Nam
+          </h1>
           <p className="hero-text">
-            Developer portfolio with a cyber-console feel, clean project
-            cards, and interactive controls you can actually mess with.
+            Dark-mode developer portfolio with hacked-terminal motion,
+            distorted signal layers, and controls you can actually mess with.
           </p>
           <div className="hero-actions" aria-label="Primary actions">
             <a className="primary-action" href="#projects">
@@ -109,8 +117,16 @@ export default function Home() {
 
         <div className="signal-panel" aria-label="Interactive site controls">
           <div className="panel-header">
-            <span>control.deck</span>
+            <span className="glitch-mini" data-text="control.deck">
+              control.deck
+            </span>
             <span className="pulse-dot" aria-hidden="true" />
+          </div>
+
+          <div className="corrupt-readout" aria-hidden="true">
+            <span>0xNQN</span>
+            <span>packet_loss: 03%</span>
+            <span>visual_noise: armed</span>
           </div>
 
           <div className="meter-grid" aria-hidden="true">
@@ -154,7 +170,7 @@ export default function Home() {
                 checked={boost}
                 onChange={(event) => setBoost(event.target.checked)}
               />
-              Boost
+              Distort
             </label>
           </div>
         </div>
@@ -163,7 +179,9 @@ export default function Home() {
       <section id="projects" className="content-section">
         <div className="section-heading">
           <p className="eyebrow">Selected work</p>
-          <h2>Projects with signal</h2>
+          <h2 className="glitch-heading" data-text="Projects with signal">
+            Projects with signal
+          </h2>
         </div>
 
         <div className="segmented-control" aria-label="Filter projects">
@@ -180,8 +198,12 @@ export default function Home() {
         </div>
 
         <div className="project-grid">
-          {visibleProjects.map((project) => (
-            <article className="project-card" key={project.title}>
+          {visibleProjects.map((project, index) => (
+            <article
+              className="project-card"
+              key={project.title}
+              style={{ "--card-index": index } as React.CSSProperties}
+            >
               <div className="card-topline">
                 <span>{project.tag}</span>
                 <span>{project.signal}</span>
@@ -201,7 +223,9 @@ export default function Home() {
       <section id="skills" className="content-section split-section">
         <div>
           <p className="eyebrow">Stack</p>
-          <h2>Things I can bend into shape</h2>
+          <h2 className="glitch-heading" data-text="Things I can bend">
+            Things I can bend into shape
+          </h2>
         </div>
         <div className="skill-cloud" aria-label="Skills">
           {skills.map((skill) => (
@@ -213,7 +237,9 @@ export default function Home() {
       <section id="lab" className="content-section lab-section">
         <div>
           <p className="eyebrow">Playground</p>
-          <h2>Current console output</h2>
+          <h2 className="glitch-heading" data-text="Current console output">
+            Current console output
+          </h2>
         </div>
         <div className="terminal-window" aria-label="Portfolio status log">
           <p>
@@ -226,7 +252,11 @@ export default function Home() {
           </p>
           <p>
             interaction layer: {scanlines ? "scanlines" : "clean"} /{" "}
-            {boost ? "boosted" : "steady"}
+            {boost ? "distorted" : "steady"}
+          </p>
+          <p>
+            <span>$</span> render --vibe dark-glitch
+            <span className="terminal-cursor" aria-hidden="true" />
           </p>
         </div>
       </section>
