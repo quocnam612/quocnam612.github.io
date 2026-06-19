@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "quocnam612",
-  description: "Portfolio of quocnam612",
+  title: "Nguyen Quoc Nam | Portfolio",
+  description:
+    "Interactive developer portfolio for Nguyen Quoc Nam, built with Next.js, React, and TypeScript.",
 };
 
 export default function RootLayout({

@@ -1,65 +1,235 @@
-import Image from "next/image";
+"use client";
+
+import { useMemo, useState } from "react";
+
+type Project = {
+  title: string;
+  tag: "Web" | "Tools" | "Systems";
+  description: string;
+  stack: string[];
+  signal: string;
+};
+
+const projects: Project[] = [
+  {
+    title: "Portfolio OS",
+    tag: "Web",
+    description:
+      "A fast personal site with animated sections, project filters, and a deploy pipeline for GitHub Pages.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind"],
+    signal: "Live",
+  },
+  {
+    title: "Study Command Center",
+    tag: "Tools",
+    description:
+      "A dashboard concept for deadlines, links, documents, and quick notes built around keyboard-first workflows.",
+    stack: ["React", "Local state", "UX"],
+    signal: "Prototype",
+  },
+  {
+    title: "Linux Lab Notes",
+    tag: "Systems",
+    description:
+      "A collection of setup notes, fixes, and experiments for Linux tooling, graphics, and developer environments.",
+    stack: ["Linux", "Shell", "Docs"],
+    signal: "Growing",
+  },
+];
+
+const skills = [
+  "React",
+  "TypeScript",
+  "Next.js",
+  "CSS",
+  "GitHub Pages",
+  "Linux",
+  "UI Design",
+  "Automation",
+];
+
+const filters = ["All", "Web", "Tools", "Systems"] as const;
+const accents = [
+  { name: "Cyan", value: "#22d3ee" },
+  { name: "Lime", value: "#a3e635" },
+  { name: "Rose", value: "#fb7185" },
+];
 
 export default function Home() {
+  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const [accent, setAccent] = useState(accents[0]);
+  const [scanlines, setScanlines] = useState(true);
+  const [boost, setBoost] = useState(false);
+
+  const visibleProjects = useMemo(() => {
+    if (filter === "All") {
+      return projects;
+    }
+
+    return projects.filter((project) => project.tag === filter);
+  }, [filter]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main
+      className={`site-shell ${scanlines ? "scanlines-on" : ""} ${
+        boost ? "boost-on" : ""
+      }`}
+      style={{ "--accent": accent.value } as React.CSSProperties}
+    >
+      <div className="ambient-grid" aria-hidden="true" />
+
+      <nav className="topbar" aria-label="Main navigation">
+        <a href="#home" className="brand-mark" aria-label="Go to hero">
+          NQN
+        </a>
+        <div className="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#lab">Lab</a>
+        </div>
+      </nav>
+
+      <section id="home" className="hero-section">
+        <div className="hero-copy">
+          <p className="eyebrow">Available for building, learning, and shipping</p>
+          <h1>Nguyen Quoc Nam</h1>
+          <p className="hero-text">
+            Developer portfolio with a cyber-console feel, clean project
+            cards, and interactive controls you can actually mess with.
+          </p>
+          <div className="hero-actions" aria-label="Primary actions">
+            <a className="primary-action" href="#projects">
+              View Projects
+            </a>
+            <a className="secondary-action" href="mailto:nguyenquocnam612@gmail.com">
+              Contact
+            </a>
+          </div>
+        </div>
+
+        <div className="signal-panel" aria-label="Interactive site controls">
+          <div className="panel-header">
+            <span>control.deck</span>
+            <span className="pulse-dot" aria-hidden="true" />
+          </div>
+
+          <div className="meter-grid" aria-hidden="true">
+            {Array.from({ length: 36 }, (_, index) => (
+              <span
+                key={index}
+                style={{ animationDelay: `${(index % 9) * 90}ms` }}
+              />
+            ))}
+          </div>
+
+          <div className="control-group" aria-label="Accent color">
+            <p>Accent</p>
+            <div className="swatches">
+              {accents.map((item) => (
+                <button
+                  key={item.name}
+                  className={accent.name === item.name ? "active" : ""}
+                  type="button"
+                  onClick={() => setAccent(item)}
+                  style={{ "--swatch": item.value } as React.CSSProperties}
+                  aria-label={`Use ${item.name} accent`}
+                  title={`Use ${item.name} accent`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="toggle-row">
+            <label>
+              <input
+                type="checkbox"
+                checked={scanlines}
+                onChange={(event) => setScanlines(event.target.checked)}
+              />
+              Scanlines
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={boost}
+                onChange={(event) => setBoost(event.target.checked)}
+              />
+              Boost
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="content-section">
+        <div className="section-heading">
+          <p className="eyebrow">Selected work</p>
+          <h2>Projects with signal</h2>
+        </div>
+
+        <div className="segmented-control" aria-label="Filter projects">
+          {filters.map((item) => (
+            <button
+              key={item}
+              type="button"
+              className={filter === item ? "active" : ""}
+              onClick={() => setFilter(item)}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {item}
+            </button>
+          ))}
+        </div>
+
+        <div className="project-grid">
+          {visibleProjects.map((project) => (
+            <article className="project-card" key={project.title}>
+              <div className="card-topline">
+                <span>{project.tag}</span>
+                <span>{project.signal}</span>
+              </div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="stack-list">
+                {project.stack.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="skills" className="content-section split-section">
+        <div>
+          <p className="eyebrow">Stack</p>
+          <h2>Things I can bend into shape</h2>
+        </div>
+        <div className="skill-cloud" aria-label="Skills">
+          {skills.map((skill) => (
+            <span key={skill}>{skill}</span>
+          ))}
+        </div>
+      </section>
+
+      <section id="lab" className="content-section lab-section">
+        <div>
+          <p className="eyebrow">Playground</p>
+          <h2>Current console output</h2>
+        </div>
+        <div className="terminal-window" aria-label="Portfolio status log">
+          <p>
+            <span>$</span> pnpm build
+          </p>
+          <p>compiled static portfolio for github pages</p>
+          <p>
+            <span>$</span> filter --mode {filter.toLowerCase()} --accent{" "}
+            {accent.name.toLowerCase()}
+          </p>
+          <p>
+            interaction layer: {scanlines ? "scanlines" : "clean"} /{" "}
+            {boost ? "boosted" : "steady"}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }

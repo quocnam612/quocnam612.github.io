@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #080a0f;
+  --foreground: #eef4ff;
+  --muted: #9aa8bb;
+  --panel: rgba(13, 18, 28, 0.76);
+  --line: rgba(238, 244, 255, 0.14);
+  --accent: #22d3ee;
 }
 
 @theme inline {
@@ -12,15 +16,436 @@
   --font-mono: "Courier New", Courier, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(34, 211, 238, 0.16), transparent 28rem),
+    radial-gradient(circle at 82% 16%, rgba(251, 113, 133, 0.12), transparent 24rem),
+    var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.ambient-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.site-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.055),
+    transparent 2px,
+    transparent 8px
+  );
+  background-size: 100% 10px;
+  opacity: 0;
+}
+
+.scanlines-on::after {
+  opacity: 0.35;
+}
+
+.boost-on .meter-grid span {
+  animation-duration: 700ms;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1120px, calc(100% - 32px));
+  height: 64px;
+  margin: 0 auto;
+  backdrop-filter: blur(18px);
+}
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent);
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links a {
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  border-color: var(--line);
+  color: var(--foreground);
+  outline: none;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+  width: min(1120px, calc(100% - 32px));
+  min-height: calc(100vh - 96px);
+  margin: 0 auto;
+  padding: 48px 0 88px;
+}
+
+.hero-copy h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(3.5rem, 12vw, 9.5rem);
+  line-height: 0.86;
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero-text {
+  max-width: 650px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.28rem);
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  font-weight: 800;
+}
+
+.primary-action {
+  background: var(--accent);
+  color: #071014;
+}
+
+.secondary-action {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--foreground);
+}
+
+.signal-panel,
+.project-card,
+.terminal-window {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.signal-panel {
+  padding: 18px;
+}
+
+.panel-header,
+.card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82rem;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 24px var(--accent);
+}
+
+.meter-grid {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 8px;
+  margin: 26px 0;
+}
+
+.meter-grid span {
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: meterPulse 1500ms ease-in-out infinite alternate;
+}
+
+@keyframes meterPulse {
+  from {
+    opacity: 0.22;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+.control-group p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.swatches {
+  display: flex;
+  gap: 10px;
+}
+
+.swatches button {
+  width: 34px;
+  height: 34px;
+  border: 2px solid transparent;
+  background: var(--swatch);
+}
+
+.swatches button.active {
+  border-color: var(--foreground);
+}
+
+.toggle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toggle-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.content-section {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 88px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-heading,
+.split-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 32px;
+  align-items: start;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.segmented-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 34px 0 22px;
+}
+
+.segmented-control button {
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+}
+
+.segmented-control button.active {
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.project-card {
+  min-height: 286px;
+  padding: 18px;
+}
+
+.project-card h3 {
+  margin: 48px 0 14px;
+  font-size: 1.45rem;
+}
+
+.project-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.stack-list,
+.skill-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stack-list {
+  margin-top: 22px;
+}
+
+.stack-list span,
+.skill-cloud span {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.stack-list span {
+  padding: 6px 8px;
+}
+
+.skill-cloud span {
+  padding: 12px 14px;
+}
+
+.lab-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 32px;
+  padding-bottom: 120px;
+}
+
+.terminal-window {
+  min-height: 260px;
+  padding: 22px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.terminal-window p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.terminal-window span {
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .hero-section,
+  .section-heading,
+  .split-section,
+  .lab-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding-top: 42px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    width: min(100% - 20px, 1120px);
+  }
+
+  .nav-links a {
+    padding-inline: 8px;
+    font-size: 0.84rem;
+  }
+
+  .hero-section,
+  .content-section {
+    width: min(100% - 20px, 1120px);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3.25rem, 18vw, 5.4rem);
+  }
+
+  .hero-actions a {
+    width: 100%;
+  }
 }
