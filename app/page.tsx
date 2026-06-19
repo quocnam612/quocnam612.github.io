@@ -85,26 +85,16 @@ const socialLinks: SocialLink[] = [
 function PixelIcon({ icon }: { icon: SocialLink["icon"] }) {
   if (icon === "youtube") {
     return (
-      <svg className="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
-        <rect x="2" y="4" width="12" height="8" />
-        <rect x="3" y="3" width="10" height="1" />
-        <rect x="3" y="12" width="10" height="1" />
-        <rect className="pixel-cut" x="6" y="6" width="2" height="4" />
-        <rect className="pixel-cut" x="8" y="7" width="2" height="2" />
-        <rect className="pixel-cut" x="10" y="8" width="1" height="1" />
+      <svg className="pixel-icon" viewBox="0 0 1200 1200" aria-hidden="true">
+        <path d="M1200 1055.438H0V144.562h1200zm-772.708-189.34l419.616-263.539l-419.616-263.54z" />
       </svg>
     );
   }
 
   if (icon === "linkedin") {
     return (
-      <svg className="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
-        <rect x="2" y="6" width="3" height="8" />
-        <rect x="2" y="2" width="3" height="3" />
-        <rect x="7" y="6" width="3" height="8" />
-        <rect x="10" y="7" width="3" height="7" />
-        <rect x="9" y="5" width="3" height="2" />
-        <rect x="12" y="8" width="2" height="6" />
+      <svg className="pixel-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19.959 11.719v7.379h-4.278v-6.885c0-1.73-.619-2.91-2.167-2.91c-1.182 0-1.886.796-2.195 1.565c-.113.275-.142.658-.142 1.043v7.187h-4.28s.058-11.66 0-12.869h4.28v1.824l-.028.042h.028v-.042c.568-.875 1.583-2.126 3.856-2.126c2.815 0 4.926 1.84 4.926 5.792M2.421.026C.958.026 0 .986 0 2.249c0 1.235.93 2.224 2.365 2.224h.028c1.493 0 2.42-.989 2.42-2.224C4.787.986 3.887.026 2.422.026zM.254 19.098h4.278V6.229H.254z" />
       </svg>
     );
   }
@@ -115,11 +105,7 @@ function PixelIcon({ icon }: { icon: SocialLink["icon"] }) {
 }
 
 function EyeIcon() {
-  return (
-    <svg className="view-count-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 8h2v2H4zm2-2h4v2H6zm4 2h4v2h-4zm4-2h4v2h-4zm4 2h2v2h-2zM2 10h2v4H2zm18 0h2v4h-2zM4 14h2v2H4zm2 2h4v2H6zm4-2h4v2h-4zm4 2h4v2h-4zm4-2h2v2h-2zM10 10h4v4h-4z" />
-    </svg>
-  );
+  return <span className="view-count-icon i-pixelarticons-eye" aria-hidden="true" />;
 }
 
 function softenSignedCameraAxis(value: number, strength = 1) {
@@ -132,6 +118,7 @@ function softenOffsetCameraAxis(value: number, strength = 1) {
 
 export default function Home() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const [viewCount, setViewCount] = useState("0");
   const shellRef = useRef<HTMLElement | null>(null);
   const frameRef = useRef<number | null>(null);
   const scrollTimerRef = useRef<number | null>(null);
@@ -212,6 +199,37 @@ export default function Home() {
   }
 
   useEffect(() => {
+    let ignore = false;
+
+    async function loadViewCount() {
+      try {
+        const response = await fetch(
+          "https://quocnam612.goatcounter.com/counter/TOTAL.json",
+          { cache: "no-store" },
+        );
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data = (await response.json()) as { count?: string };
+
+        if (!ignore && data.count) {
+          setViewCount(data.count);
+        }
+      } catch {
+        // Keep the static fallback if GoatCounter is blocked or unavailable.
+      }
+    }
+
+    loadViewCount();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  useEffect(() => {
     return () => {
       if (frameRef.current !== null) {
         cancelAnimationFrame(frameRef.current);
@@ -274,9 +292,9 @@ export default function Home() {
               <a className="primary-action" href="#projects">
                 View Projects
               </a>
-              <span className="view-count" aria-label="612 views">
+              <span className="view-count" aria-label={`${viewCount} views`}>
                 <EyeIcon />
-                <span>612</span>
+                <span>{viewCount}</span>
               </span>
             </div>
           </div>
@@ -302,7 +320,7 @@ export default function Home() {
               <p className="profile-bio">procrastinating final boss</p>
               <a
                 className="profile-button"
-                href="mailto:nguyenquocnam612@gmail.com"
+                href="mailto:24120098@student.hcmus.edu.vn"
               >
                 Contact
               </a>
@@ -312,6 +330,20 @@ export default function Home() {
               <p>HCMUS · Thu Duc · UTC +07:00</p>
             </div>
           </aside>
+        </section>
+
+        <section id="skills" className="content-section split-section">
+          <div>
+            <p className="eyebrow">Stack</p>
+            <h2 className="glitch-heading" data-text="Things I can bend">
+              Things I can bend into shape
+            </h2>
+          </div>
+          <div className="skill-cloud" aria-label="Skills">
+            {skills.map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
         </section>
 
         <section id="projects" className="content-section">
@@ -354,20 +386,6 @@ export default function Home() {
                   ))}
                 </div>
               </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="skills" className="content-section split-section">
-          <div>
-            <p className="eyebrow">Stack</p>
-            <h2 className="glitch-heading" data-text="Things I can bend">
-              Things I can bend into shape
-            </h2>
-          </div>
-          <div className="skill-cloud" aria-label="Skills">
-            {skills.map((skill) => (
-              <span key={skill}>{skill}</span>
             ))}
           </div>
         </section>

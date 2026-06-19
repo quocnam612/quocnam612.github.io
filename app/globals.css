@@ -397,9 +397,11 @@ button {
 }
 
 .view-count-icon {
+  display: inline-block;
   width: 24px;
   height: 24px;
   fill: currentColor;
+  image-rendering: pixelated;
   shape-rendering: crispEdges;
 }
 
@@ -1253,4 +1255,25 @@ h2 {
 .hero-copy,
 .avatar-stage {
   transition-property: none;
+}
+
+/* Theme-matched glitch hover colors. */
+.primary-action:hover,
+.secondary-action:hover,
+.social-link:hover,
+.social-link:focus-visible {
+  border-color: var(--accent);
+  box-shadow:
+    4px 4px 0 color-mix(in srgb, var(--violet) 62%, transparent),
+    -4px -4px 0 color-mix(in srgb, var(--danger) 46%, transparent),
+    0 0 24px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.55),
+    5px 0 0 color-mix(in srgb, var(--danger) 42%, transparent),
+    -5px 0 0 color-mix(in srgb, var(--accent) 36%, transparent),
+    0 0 26px color-mix(in srgb, var(--violet) 20%, transparent);
 }
