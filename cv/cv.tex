@@ -1,0 +1,132 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[pdftex]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[main=english,vietnamese]{babel}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{#2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{{\Large \foreignlanguage{vietnamese}{Nguyễn Quốc Nam}}} & Email : \href{mailto:24120098@student.hcmus.edu.vn}{24120098@student.hcmus.edu.vn}\\
+  & Mobile : 0852550335 \\
+\end{tabular*}
+
+%----------PROFILE------------------
+\section{Profile}
+Second-year Computer Science student at the Ho Chi Minh City University of Science. Comfortable working across frontend, backend, UI/UX design, editing, and light DevOps; familiar with Linux, MongoDB, Unity and Firebase. Able to brainstorm ideas, adapt to new challenges and work effectively under pressure. Seeking opportunities to apply and expand my skills in software development, design and automation.
+
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Thoai Ngoc Hau High School for the Gifted}{An Giang, Vietnam}
+      {GPA: 3.84 (9.6/10.0)}{Sep. 2021 -- May. 2024}
+    \resumeSubheading
+      {Ho Chi Minh City University of Science}{Ho Chi Minh, Vietnam}
+      {Bachelor of Computer Science}{2024 -- Present}
+      \resumeItemListStart
+        \resumeItem{Related Coursework}{: Data Structures and Algorithms, Object-Oriented Programming, Computer Networks, Databases, Computational Thinking, Computer Architecture}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------------
+\section{Technical Skills}
+	\resumeItemListStart
+		\resumeItem{}{Frontend development with React, Next.js, Tailwind CSS, HTML, CSS and Flutter}
+		\resumeItem{}{Backend development with Node.js, Express, FastAPI, Crow and NoSQL}
+		\resumeItem{}{Experience with C/C++, Docker, Git, and Linux-based development workflows}
+		\resumeItem{}{Game and automation development using Unity, C\# and Puppeteer}
+	\resumeItemListEnd
+
+%------------ADDITIONAL SKILLS------------------
+\section{Additional Skills}
+	\resumeItemListStart
+		\resumeItem{}{Fluency in Vietnamese and working proficiency in English}
+		\resumeItem{}{Experience working in teams, using Git source control, and communicating technical ideas clearly}
+		\resumeItem{}{UI/UX and visual design experience with Figma, Photoshop, After Effects, and Blender}
+		\resumeItem{}{Ability to learn new tools quickly, adapt across design and engineering tasks}
+		\resumeItem{}{Ability to work under pressure and handle tight deadlines}
+	\resumeItemListEnd
+
+%------------WORK EXPERIENCE---------------
+\section{Work Experience}
+	\resumeSubHeadingListStart
+		\resumeSubItem{Video Editor / Motion Designer}{: Created presentation intros, poster and videos edit templates; usually responsible for editing when a team project requires additional visual work}
+	\resumeSubHeadingListEnd
+
+%------------HOBBIES AND INTERESTS-----------
+\section{Hobbies and Interests}
+	\resumeItemListStart
+		\resumeItem{}{Build websites, apps, bots and automation tools to suit personal needs}
+		\resumeItem{}{Customize Linux and developer environments, experiment with new tools, and refine personal workflows}
+		\resumeItem{}{Create visual assets, edit photos and videos of friends, and modify 3D assets for project needs}
+	\resumeItemListEnd
+
+%--------------REFERENCES-----------------
+\section{References}
+	Available on request
+
+%-------------------------------------------
+\end{document}

@@ -10,9 +10,13 @@ const departureMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Nguyen Quoc Nam | Portfolio",
+  title: "NQN612",
   description:
     "Interactive developer portfolio for Nguyen Quoc Nam, built with Next.js, React, and TypeScript.",
+  icons: {
+    icon: [{ url: "/blocks-wave.svg", type: "image/svg+xml" }],
+    shortcut: [{ url: "/blocks-wave.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({

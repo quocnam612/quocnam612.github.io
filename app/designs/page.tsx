@@ -1,35 +1,53 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import type { Metadata } from "next";
+import { CameraShell } from "../components/camera-shell";
+import { designs } from "./designs-data";
+
+export const metadata: Metadata = {
+  title: "Designs | NQN612",
+  description: "Design tools and visual experiments by Nguyen Quoc Nam.",
+};
 
 export default function DesignsPage() {
   return (
-    <main className="site-shell scanlines-on route-shell">
-      <div className="ambient-grid" aria-hidden="true" />
-      <div className="noise-field" aria-hidden="true" />
+    <CameraShell className="route-shell">
       <section className="content-section route-page designs-section">
         <div>
-          <Link className="route-back" href="/">
-            /home
-          </Link>
-          <p className="eyebrow">Designs</p>
-          <h1 className="glitch-heading" data-text="Visual experiments">
-            Visual experiments
+          <div className="route-header">
+            <span className="route-back">/HOME/DESIGNS</span>
+            <Link className="route-home-button" href="/">
+              Back home
+            </Link>
+          </div>
+          <h1 className="glitch-heading" data-text="Designs">
+            Designs
           </h1>
         </div>
-        <div className="terminal-window" aria-label="Design notes">
-          <p>
-            <span>$</span> load --gallery designs
-          </p>
-          <p>3D, pixel, profile, and glitch experiments live here.</p>
-          <p>
-            <span>$</span> status --next
-          </p>
-          <p>wire image/model assets from public/images and public/models</p>
-          <p>
-            <span>$</span> render --vibe dark-glitch
-            <span className="terminal-cursor" aria-hidden="true" />
-          </p>
+        <div className="project-grid route-grid route-card-grid designs-grid">
+          {designs.map((design, index) => (
+            <Link
+              aria-label={`Open ${design.title} design detail`}
+              className="project-card design-card"
+              href={`/designs/${design.slug}`}
+              key={design.title}
+              style={{ "--card-index": index } as CSSProperties}
+            >
+              <div className="card-topline">
+                <span>{design.type}</span>
+                <span>#{index + 1}</span>
+              </div>
+              <h3>{design.title}</h3>
+              <p>{design.description}</p>
+              <div className="stack-list">
+                {design.tools.map((tool) => (
+                  <span key={tool}>{tool}</span>
+                ))}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
-    </main>
+    </CameraShell>
   );
 }
