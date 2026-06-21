@@ -10,16 +10,16 @@ export type ProjectVideo = {
 
 type ProjectVideoFrameProps = {
   videos: readonly ProjectVideo[];
+  placeholder?: string;
 };
 
-export function ProjectVideoFrame({ videos }: ProjectVideoFrameProps) {
+export function ProjectVideoFrame({
+  placeholder = "No project footage archived yet.",
+  videos,
+}: ProjectVideoFrameProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeVideo = videos[activeIndex];
   const lastIndex = videos.length - 1;
-
-  if (!activeVideo) {
-    return null;
-  }
 
   function showPrevious() {
     setActiveIndex((currentIndex) =>
@@ -39,39 +39,47 @@ export function ProjectVideoFrame({ videos }: ProjectVideoFrameProps) {
         <span>Project / Footage / Videos</span>
       </div>
       <figure className="steam-album-preview">
-        <button
-          aria-label="Show previous video"
-          className="album-arrow album-arrow-left"
-          onClick={showPrevious}
-          type="button"
-        >
-          &lt;
-        </button>
-        <video
-          aria-label={activeVideo.label}
-          autoPlay
-          className="case-video"
-          key={activeVideo.src}
-          loop
-          muted
-          playsInline
-          poster={activeVideo.poster}
-          preload="auto"
-          src={activeVideo.src}
-        />
-        <button
-          aria-label="Show next video"
-          className="album-arrow album-arrow-right"
-          onClick={showNext}
-          type="button"
-        >
-          &gt;
-        </button>
-        <figcaption>
-          <span>
-            {activeIndex + 1}/{videos.length}
-          </span>
-        </figcaption>
+        {activeVideo ? (
+          <>
+            <button
+              aria-label="Show previous video"
+              className="album-arrow album-arrow-left"
+              onClick={showPrevious}
+              type="button"
+            >
+              &lt;
+            </button>
+            <video
+              aria-label={activeVideo.label}
+              autoPlay
+              className="case-video"
+              key={activeVideo.src}
+              loop
+              muted
+              playsInline
+              poster={activeVideo.poster}
+              preload="auto"
+              src={activeVideo.src}
+            />
+            <button
+              aria-label="Show next video"
+              className="album-arrow album-arrow-right"
+              onClick={showNext}
+              type="button"
+            >
+              &gt;
+            </button>
+            <figcaption>
+              <span>
+                {activeIndex + 1}/{videos.length}
+              </span>
+            </figcaption>
+          </>
+        ) : (
+          <div className="case-video-placeholder">
+            <span>{placeholder}</span>
+          </div>
+        )}
       </figure>
     </section>
   );

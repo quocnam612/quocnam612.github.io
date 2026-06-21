@@ -2232,6 +2232,33 @@ h2 {
   object-fit: cover;
 }
 
+.case-video-placeholder {
+  display: grid;
+  min-height: clamp(280px, 48vw, 620px);
+  aspect-ratio: 16 / 9;
+  place-items: center;
+  padding: 24px;
+  background:
+    linear-gradient(rgba(34, 215, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 79, 216, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(34, 215, 255, 0.14), transparent 38%),
+    #050018;
+  background-size:
+    18px 18px,
+    18px 18px,
+    auto,
+    auto;
+  color: var(--muted);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.case-video-placeholder span {
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  background: rgba(12, 9, 38, 0.52);
+}
+
 .video-frame {
   position: relative;
   display: grid;
