@@ -1,8 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CameraShell } from "../../components/camera-shell";
+import { ProjectAlbum } from "../../components/project-album";
+import { ProjectVideoFrame } from "../../components/project-video-frame";
 import { projects } from "../projects-data";
 
 type ProjectDetailPageProps = {
@@ -12,29 +13,24 @@ type ProjectDetailPageProps = {
 };
 
 const echoesAssetsPath = "/images/projects/echoes-of-the-forest";
-
-const echoesStats = [
-  ["Engine", "Unity"],
-  ["Net", "Photon PUN2"],
-  ["Code", "50+ C# scripts"],
-  ["Build", "Windows"],
-];
+const echoesSourceUrl =
+  "https://github.com/quocnam612/Survival-Multiplayer-Project-2.0";
 
 const echoesSystems = [
   {
     title: "Player loop",
     description:
-      "Movement, zoom, respawn, stamina, hunger, health, combat, and Photon-synced animation.",
+      "Movement, zoom, head tilt, respawn, stamina, hunger, health, combat, layered animations and Photon-synced networking.",
   },
   {
     title: "Inventory core",
     description:
-      "Slot references, item lists, hotbar equip, stack/split/drop/delete, crafting, and cooking.",
+      "Slot references, recipes, ingredient management, item sway/bob, hotbar equip/use, stack/split/drop/delete item, crafting, cooking and character view.",
   },
   {
     title: "Forest entities",
     description:
-      "Cow AI, handmade rigs, Siren Head day patrol, night chase behavior, and interaction zones.",
+      "Cow AI, monster behavior, rigging, animations, and interaction zones.",
   },
   {
     title: "World polish",
@@ -45,6 +41,13 @@ const echoesSystems = [
 
 const echoesShots = [
   {
+    src: `${echoesAssetsPath}/pic9.png`,
+    alt: "Echoes of the Forest start screen",
+    caption: "Start screen",
+    width: 1269,
+    height: 716,
+  },
+  {
     src: `${echoesAssetsPath}/pic1.png`,
     alt: "Player character and survival UI",
     caption: "Survival HUD",
@@ -52,18 +55,25 @@ const echoesShots = [
     height: 786,
   },
   {
-    src: `${echoesAssetsPath}/pic2.png`,
-    alt: "Cooking menu interface",
-    caption: "Cooking menu",
-    width: 1296,
-    height: 875,
+    src: `${echoesAssetsPath}/pic4.png`,
+    alt: "Cow entity in forest environment",
+    caption: "Cow entity",
+    width: 1389,
+    height: 774,
   },
   {
-    src: `${echoesAssetsPath}/pic3.png`,
-    alt: "Crafting menu interface",
-    caption: "Crafting menu",
-    width: 1136,
-    height: 739,
+    src: `${echoesAssetsPath}/pic5.png`,
+    alt: "Forest area with cow entity",
+    caption: "Forest route",
+    width: 1685,
+    height: 774,
+  },
+  {
+    src: `${echoesAssetsPath}/pic6.png`,
+    alt: "Forest gameplay with survival entities",
+    caption: "Exploration",
+    width: 1682,
+    height: 772,
   },
   {
     src: `${echoesAssetsPath}/pic7.png`,
@@ -71,6 +81,26 @@ const echoesShots = [
     caption: "Night threat",
     width: 1673,
     height: 780,
+  },
+  {
+    src: `${echoesAssetsPath}/pic8.png`,
+    alt: "Forest base and infrastructure",
+    caption: "Forest base",
+    width: 1662,
+    height: 795,
+  },
+];
+
+const echoesVideos = [
+  {
+    label: "Echoes of the Forest footage 1",
+    poster: `${echoesAssetsPath}/pic9.png`,
+    src: `${echoesAssetsPath}/footage2.mp4`,
+  },
+  {
+    label: "Echoes of the Forest footage 2",
+    poster: `${echoesAssetsPath}/pic1.png`,
+    src: `${echoesAssetsPath}/footage1-loop.mp4`,
   },
 ];
 
@@ -160,93 +190,59 @@ function EchoesProjectPage() {
           <span className="route-back">/HOME/PROJECTS/echoes-of-the-forest</span>
           <div className="route-actions">
             <Link className="route-home-button" href="/projects">
-              Projects
+              See more projects
             </Link>
           </div>
         </div>
 
         <section className="case-hero">
           <div className="case-copy">
-            <div className="case-title-row">
-              <Image
-                className="case-logo"
-                src={`${echoesAssetsPath}/logo.png`}
-                alt="Echoes of the Forest logo"
-                width={130}
-                height={135}
-                priority
-              />
-              <p className="eyebrow" tabIndex={0}>
-                Multiplayer survival prototype
-              </p>
-            </div>
-            <h1 className="glitch-heading" data-text="Echoes of the Forest">
-              Echoes of the Forest
-            </h1>
-            <p className="case-lede">
-              Unity survival prototype with Photon multiplayer, a custom
-              inventory/crafting loop, synced player animation, forest AI, and
-              enough handmade fixes to make free assets behave.
-            </p>
-            <div className="stack-list case-stack">
-              {["Unity", "C#", "Photon PUN2", "Blender", "Photoshop"].map(
-                (item) => (
+            <div className="case-title-block">
+              <div className="case-title-row">
+                <h1 className="glitch-heading" data-text="Echoes of the Forest">
+                  Echoes of the Forest
+                </h1>
+                <a
+                  className="case-source-button"
+                  href={echoesSourceUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  PROJECT SOURCE →
+                </a>
+              </div>
+              <div className="stack-list case-stack">
+                {["Unity", "C#", "Photon PUN2"].map((item) => (
                   <span key={item}>{item}</span>
-                ),
-              )}
+                ))}
+              </div>
             </div>
 
-            <div className="case-stat-grid">
-              {echoesStats.map(([label, value]) => (
-                <div className="case-stat" key={label}>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
-                </div>
-              ))}
+            <p className="case-lede">
+              My first Unity project, a survival game, inspired by Minecraft and The Forest. Started as a simple game project for a college course, but I decided to make it 3D and add multiplayer for some reasons. I put a lot of effort into it and was even gonna add procedural generation but I didn&apos;t have enough time. I learned a lot about Unity, C#, and game development from this.
+            </p>
+
+            <div className="case-detail-grid">
+              <ProjectVideoFrame videos={echoesVideos} />
             </div>
-          </div>
-          <div className="case-hero-media">
-            <video
-              aria-label="Echoes of the Forest gameplay loop"
-              autoPlay
-              className="case-video"
-              loop
-              muted
-              playsInline
-              poster={`${echoesAssetsPath}/pic9.png`}
-              preload="auto"
-              src={`${echoesAssetsPath}/footage1-loop.mp4`}
-            />
           </div>
         </section>
 
         <section className="case-section">
           <div className="case-panel-heading">
-            <h2 className="glitch-mini" data-text="What I built">
+            <h2 className="glitch-mini" data-text="What I built" tabIndex={0}>
               What I built
             </h2>
-            <span>Unity / Photon / gameplay systems</span>
+            <span>Project / Footage / Screenshots</span>
           </div>
           <div className="case-body-grid">
+            <ProjectAlbum images={echoesShots} />
             <div className="case-system-grid">
               {echoesSystems.map((system) => (
-                <article className="case-system-card" key={system.title}>
+                <article className="case-system-card" key={system.title} tabIndex={0}>
                   <h3>{system.title}</h3>
                   <p>{system.description}</p>
                 </article>
-              ))}
-            </div>
-            <div className="case-gallery">
-              {echoesShots.map((shot) => (
-                <figure className="case-shot" key={shot.src}>
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                  />
-                  <figcaption>{shot.caption}</figcaption>
-                </figure>
               ))}
             </div>
           </div>

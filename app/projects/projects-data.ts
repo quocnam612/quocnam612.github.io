@@ -13,7 +13,7 @@ export const projects = [
     type: "Personal Project",
     description:
       "Multiplayer 3D desktop game with the concept of surviving in a mysterious forest.",
-    stack: ["Unity", "C#", "Photon PUN2", "Blender", "Photoshop"],
+    stack: ["Unity", "C#", "Photon PUN2"],
   },
   {
     title: "Clavicular",
