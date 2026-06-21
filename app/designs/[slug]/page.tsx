@@ -49,9 +49,11 @@ export default async function DesignDetailPage({
       <section className="content-section route-page">
         <div className="route-header">
           <span className="route-back">/HOME/DESIGNS/{design.slug}</span>
-          <Link className="route-home-button" href="/">
-            Back home
-          </Link>
+          <div className="route-actions">
+            <Link className="route-home-button" href="/designs">
+              Designs
+            </Link>
+          </div>
         </div>
         <div
           className="terminal-window route-terminal"

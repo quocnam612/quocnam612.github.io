@@ -15,9 +15,6 @@ export default function ProjectsPage() {
       <section className="content-section route-page">
         <div className="route-header">
           <span className="route-back">/HOME/PROJECTS</span>
-          <Link className="route-home-button" href="/">
-            Back home
-          </Link>
         </div>
         <h1 className="glitch-heading" data-text="Projects">
           Projects

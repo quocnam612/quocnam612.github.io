@@ -16,9 +16,6 @@ export default function DesignsPage() {
         <div>
           <div className="route-header">
             <span className="route-back">/HOME/DESIGNS</span>
-            <Link className="route-home-button" href="/">
-              Back home
-            </Link>
           </div>
           <h1 className="glitch-heading" data-text="Designs">
             Designs

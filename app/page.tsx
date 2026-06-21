@@ -10,18 +10,12 @@ import {
 import {
   DesignToolIcon,
   EyeIcon,
-  SocialIcon,
   type DesignToolIconName,
-  type SocialIconName,
 } from "./components/icons";
+import { SiteFooter } from "./components/site-footer";
+import { SiteNav } from "./components/site-nav";
 import { useCameraMotion } from "./components/use-camera-motion";
 import { projects } from "./projects/projects-data";
-
-type SocialLink = {
-  label: string;
-  href: string;
-  icon: SocialIconName;
-};
 
 const featuredProjects = projects.slice(0, 6);
 
@@ -74,24 +68,6 @@ const designTools: Array<{
     icon: "figma",
     description:
       "Used to design UI/UX flows, app concepts, and web layouts before turning ideas into actual builds.",
-  },
-];
-
-const socialLinks: SocialLink[] = [
-  {
-    label: "GitHub",
-    href: "https://github.com/quocnam612",
-    icon: "github",
-  },
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/@quocnam612",
-    icon: "youtube",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/nam-nguy%E1%BB%85n-qu%E1%BB%91c-5765a8352",
-    icon: "linkedin",
   },
 ];
 
@@ -148,34 +124,12 @@ export default function Home() {
       <div className="noise-field" aria-hidden="true" />
 
       <div className="camera-view">
-        <nav className="topbar" aria-label="Main navigation">
-          <div className="social-links" aria-label="Social links">
-            {socialLinks.map((link) => (
-              <a
-                className={`social-link social-link-${link.icon}`}
-                href={link.href}
-                key={link.label}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={link.label}
-                title={link.label}
-              >
-                <SocialIcon icon={link.icon} />
-              </a>
-            ))}
-          </div>
-          <div className="nav-links">
-            <Link href="/projects">Projects</Link>
-            <Link href="/skills">Skills</Link>
-            <Link href="/designs">Designs</Link>
-            <Link href="/about">About</Link>
-          </div>
-        </nav>
+        <SiteNav />
 
         <section id="home" className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow" tabIndex={0}>
-              signal unstable / builder online
+              chmod +x portfolio.sh
             </p>
             <h1 className="glitch-title" data-text="./portfolio" tabIndex={0}>
               ./portfolio
@@ -343,16 +297,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="site-footer">
-          <p>you reached the end. suspiciously productive of you.</p>
-          <a
-            href="https://github.com/quocnam612/quocnam612.github.io"
-            target="_blank"
-            rel="noreferrer"
-          >
-            See source code
-          </a>
-        </footer>
+        <SiteFooter />
       </div>
     </main>
   );

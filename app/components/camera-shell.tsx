@@ -1,6 +1,8 @@
 "use client";
 
 import { type ReactNode } from "react";
+import { SiteFooter } from "./site-footer";
+import { SiteNav } from "./site-nav";
 import { useCameraMotion } from "./use-camera-motion";
 
 type CameraShellProps = {
@@ -27,7 +29,11 @@ export function CameraShell({ children, className = "" }: CameraShellProps) {
     >
       <div className="ambient-grid" aria-hidden="true" />
       <div className="noise-field" aria-hidden="true" />
-      <div className="camera-view">{children}</div>
+      <div className="camera-view">
+        <SiteNav />
+        {children}
+        <SiteFooter />
+      </div>
     </main>
   );
 }

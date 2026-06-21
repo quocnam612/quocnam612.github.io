@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { CameraShell } from "../components/camera-shell";
@@ -59,9 +58,6 @@ export default function SkillsPage() {
       <section className="content-section route-page">
         <div className="route-header">
           <span className="route-back">/HOME/SKILLS</span>
-          <Link className="route-home-button" href="/">
-            Back home
-          </Link>
         </div>
         <h1 className="glitch-heading" data-text="Skills">
           Skills
