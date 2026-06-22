@@ -40,6 +40,21 @@ const tourxportAssetsPath = "/images/projects/tourxport";
 const clavicularAssetsPath = "/images/projects/clavicular";
 const wasteAssetsPath = "/images/projects/waste-management-system";
 
+const tourxportShotHeights = [
+  897, 897, 897, 897, 897, 898, 897, 897, 899, 899, 896, 898, 897, 896, 898,
+  897, 897, 894, 896, 898, 897, 898, 897, 900, 900, 900,
+] as const;
+
+const tourxportShots: ProjectAlbumImage[] = tourxportShotHeights.map(
+  (height, index) => ({
+    src: `${tourxportAssetsPath}/pic${index + 1}.webp`,
+    alt: `TourXport screenshot ${index + 1}`,
+    caption: `Screen ${index + 1}`,
+    width: 1600,
+    height,
+  }),
+);
+
 const projectCases: Record<string, ProjectCaseStudy> = {
   "echoes-of-the-forest": {
     slug: "echoes-of-the-forest",
@@ -142,67 +157,42 @@ const projectCases: Record<string, ProjectCaseStudy> = {
     sourceUrl: "https://github.com/quocnam612/TourXport",
     stack: ["Flutter", "Node.js", "Express", "FastAPI", "MongoDB"],
     lede:
-      "A cross-platform travel planning app that combines a Flutter client, Node/Express services, Python AI endpoints, and crawled location data to generate smarter trip plans across web, desktop, and mobile.",
+      "A travel planning app that turns user preferences and constraints into AI-generated itineraries. I made most of the backend, some frontend and handled data collection and deployment. The project uses a lot of external APIs and services, all of the dataset was collected through web scraping and API integrations. It's also my first time working with Oauth2 and deploying a full stack app to the cloud, so it was a great learning experience.",
     videoPlaceholder:
       "No TourXport footage archived yet. Screenshots from the web build are loaded below.",
-    videos: [],
-    shots: [
+    videos: [
       {
-        src: `${tourxportAssetsPath}/landing_page.webp`,
-        alt: "TourXport landing page",
-        caption: "Landing page",
-        width: 1600,
-        height: 809,
+        label: "TourXport walkthrough 1",
+        poster: `${tourxportAssetsPath}/pic1.webp`,
+        src: `${tourxportAssetsPath}/video1.mp4`,
       },
       {
-        src: `${tourxportAssetsPath}/dashboard.webp`,
-        alt: "TourXport dashboard",
-        caption: "Dashboard",
-        width: 1600,
-        height: 780,
-      },
-      {
-        src: `${tourxportAssetsPath}/place_detail.webp`,
-        alt: "TourXport place detail screen",
-        caption: "Place detail",
-        width: 1600,
-        height: 780,
-      },
-      {
-        src: `${tourxportAssetsPath}/survey_result.webp`,
-        alt: "TourXport survey result screen",
-        caption: "Survey result",
-        width: 1600,
-        height: 778,
-      },
-      {
-        src: `${tourxportAssetsPath}/map_screen.webp`,
-        alt: "TourXport map screen",
-        caption: "Map screen",
-        width: 1600,
-        height: 779,
+        label: "TourXport walkthrough 2",
+        poster: `${tourxportAssetsPath}/pic13.webp`,
+        src: `${tourxportAssetsPath}/video2.mp4`,
       },
     ],
+    shots: tourxportShots,
     systems: [
       {
-        title: "Trip planner",
+        title: "Backend",
         description:
-          "Turns survey inputs, budget, schedule and travel preferences into usable itinerary flows.",
+          "Built the main backend: authentication, OAuth flows, external API integration, frontend connection points, AI-backend bridge, core logic and design MongoDB schemas.",
       },
       {
-        title: "Flutter client",
+        title: "Data pipeline",
         description:
-          "Shared UI across mobile, web, Linux and Windows builds with responsive screens for maps, details and dashboards.",
+          "Scraped, cleaned and reformatted 20k+ locations with their images so the app has a rich dataset to work with.",
       },
       {
-        title: "Service stack",
+        title: "Devops",
         description:
-          "Node/Express handles account and app data while FastAPI carries heavier AI planning logic.",
+          "Set up the project environment, deployment flow, cloud services, production configuration and release builds across supported platforms.",
       },
       {
-        title: "Crawler data",
+        title: "Frontend",
         description:
-          "Location and place information is gathered from crawlers so the app can suggest richer destinations.",
+          "UI/UX for login/register, account tab and saved tab, filtering and search, and the tour browser experience.",
       },
     ],
   },
