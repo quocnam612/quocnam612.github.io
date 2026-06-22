@@ -58,7 +58,7 @@ export function ProjectVideoFrame({
               muted
               playsInline
               poster={activeVideo.poster}
-              preload="auto"
+              preload="metadata"
               src={activeVideo.src}
             />
             <button
