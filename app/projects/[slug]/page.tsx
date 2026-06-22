@@ -254,29 +254,91 @@ const projectCases: Record<string, ProjectCaseStudy> = {
   },
   "waste-management-system": {
     slug: "waste-management-system",
-    title: "Waste Management System",
+    title: "GreenRoute",
     sourceUrl:
       "https://github.com/quocnam612/CSC10003-OOP-Waste-management-and-separation-system",
     stack: ["C++23", "Crow", "CMake", "Flutter", "MongoDB"],
     lede:
-      "An OOP course project for managing waste collection and separation workflows, combining a C++ backend service, MongoDB storage, AI helper setup, and a Flutter desktop client.",
+      "My first flutter project, a desktop application for managing waste collection and refuse collectors teams, doesn't have that many features because the deadline was tight and I had to do all the work myself since my teammates were unavailable. I learned a lot about C++23, REST APIs, Crow, CMake, Flutter, Docker and MongoDB.",
     videoPlaceholder:
-      "No Waste Management footage archived yet. Static app assets are shown below.",
-    videos: [],
+      "GreenRoute walkthrough footage and desktop app screenshots are loaded below.",
+    videos: [
+      {
+        label: "GreenRoute walkthrough",
+        poster: `${wasteAssetsPath}/pic1.webp`,
+        src: `${wasteAssetsPath}/video1-optimized.mp4`,
+      },
+    ],
     shots: [
       {
-        src: `${wasteAssetsPath}/bg_pattern.webp`,
-        alt: "Waste Management System app pattern asset",
-        caption: "App pattern",
+        src: `${wasteAssetsPath}/pic1.webp`,
+        alt: "GreenRoute login screen",
+        caption: "Login",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic2.webp`,
+        alt: "GreenRoute home screen",
+        caption: "Home",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic3.webp`,
+        alt: "GreenRoute user settings screen",
+        caption: "Settings",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic4.webp`,
+        alt: "GreenRoute service registration screen",
+        caption: "Service registration",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic5.webp`,
+        alt: "GreenRoute feedback screen",
+        caption: "Feedback",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic6.webp`,
+        alt: "GreenRoute team screen",
+        caption: "Team",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic7.webp`,
+        alt: "GreenRoute worker tasks screen",
+        caption: "Worker tasks",
+        width: 1600,
+        height: 896,
+      },
+      {
+        src: `${wasteAssetsPath}/pic8.webp`,
+        alt: "GreenRoute customer management screen",
+        caption: "Customers",
+        width: 1600,
+        height: 898,
+      },
+      {
+        src: `${wasteAssetsPath}/pic9.webp`,
+        alt: "GreenRoute report management screen",
+        caption: "Reports",
         width: 1600,
         height: 900,
       },
       {
-        src: `${wasteAssetsPath}/icon_512.webp`,
-        alt: "Waste Management System app icon",
-        caption: "App icon",
-        width: 512,
-        height: 512,
+        src: `${wasteAssetsPath}/pic10.webp`,
+        alt: "GreenRoute route planning screen",
+        caption: "Route planning",
+        width: 1600,
+        height: 900,
       },
     ],
     systems: [
@@ -288,17 +350,17 @@ const projectCases: Record<string, ProjectCaseStudy> = {
       {
         title: "Flutter client",
         description:
-          "Desktop UI layer used to interact with the system and package the app for Windows or Linux.",
+          "A simple desktop UI layer used to interact with the system and package the app for Windows or Linux.",
       },
       {
         title: "Data storage",
         description:
-          "MongoDB-backed persistence for app data and route-oriented workflows.",
+          "MongoDB-backed persistence for app data and role-based access control.",
       },
       {
-        title: "AI helper",
+        title: "AI integration",
         description:
-          "Local Ollama/Gemma setup for a green-route helper service during development.",
+          " Local Ollama setup for a green-route helper service during development.",
       },
     ],
   },

@@ -24,7 +24,7 @@ export const projects = [
     stack: ["Flutter", "Three.js", "Node.js", "FastAPI", "Local"],
   },
   {
-    title: "Waste Management System",
+    title: "GreenRoute",
     slug: "waste-management-system",
     type: "Team Project",
     description:
